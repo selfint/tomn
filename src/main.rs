@@ -1,8 +1,9 @@
 mod keyword_consts;
-mod tokenizer;
+mod lexer;
+
+use lexer::Lexer;
 use std::env;
 use std::fs;
-use tokenizer::Tokenizer;
 
 fn main() {
     let args: Vec<String> = env::args().collect();
@@ -13,7 +14,7 @@ fn main() {
 
     let contents = fs::read_to_string(filename).expect("Something went wrong reading the file");
 
-    let tokenizer = Tokenizer::new();
+    let tokenizer = Lexer::new();
 
     for line in contents.lines() {
         for word in line.split_ascii_whitespace() {
