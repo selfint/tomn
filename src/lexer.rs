@@ -12,7 +12,23 @@ pub(crate) struct Token {
 
 pub(crate) struct Lexer;
 
-impl Lexer {}
+impl Lexer {
+    fn peek(&self) -> Token {
+        unimplemented!()
+    }
+
+    fn peek_n(&self) -> Vec<Token> {
+        unimplemented!()
+    }
+
+    fn consume(&mut self) -> Token {
+        unimplemented!()
+    }
+
+    fn consume_n(&mut self, n: usize) -> Vec<Token> {
+        unimplemented!()
+    }
+}
 
 #[cfg(test)]
 mod tests {}
