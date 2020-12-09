@@ -1,5 +1,6 @@
 mod keyword_consts;
 mod lexer;
+mod reader;
 
 use lexer::Lexer;
 use std::env;
