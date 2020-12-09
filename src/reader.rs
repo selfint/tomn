@@ -15,6 +15,11 @@ impl Reader {
         let word: String = self.content.split_ascii_whitespace().take(1).collect();
         word
     }
+
+    fn peek_n(&self, n: usize) -> String {
+        let word: String = self.content.split_ascii_whitespace().take(n).collect();
+        word
+    }
 }
 
 #[cfg(test)]
@@ -34,5 +39,12 @@ mod tests {
         let content = "hello world!";
         let reader = Reader::new(content);
         assert_eq!(reader.peek(), "hello");
+    }
+
+    #[test]
+    fn test_peek_n() {
+        let content = "hello world!";
+        let reader = Reader::new(content);
+        assert_eq!(reader.peek_n(2), "helloworld!");
     }
 }
