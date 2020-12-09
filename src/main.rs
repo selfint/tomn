@@ -13,7 +13,7 @@ fn main() {
 
     let contents = fs::read_to_string(filename).expect("Something went wrong reading the file");
 
-    let tokenizer = Tokenizer;
+    let tokenizer = Tokenizer::new();
 
     for line in contents.lines() {
         for word in line.split_ascii_whitespace() {
