@@ -1,9 +1,11 @@
+use crate::keyword_consts;
+
 #[derive(Eq, PartialEq, Debug)]
 pub(crate) enum TokenKind {
     BOOL,
 }
-pub(crate) const TRUE_KEYWORD: &str = "true";
 
+#[derive(Eq, PartialEq, Debug)]
 pub(crate) struct Token {
     pub value: String,
     pub kind: TokenKind,
@@ -13,7 +15,7 @@ pub(crate) struct Tokenizer;
 
 impl Tokenizer {
     pub fn convert_word_to_token(&self, word: &str) -> Result<Token, &'static str> {
-        if word == TRUE_KEYWORD {
+        if word == keyword_consts::TRUE_KEYWORD {
             let token = Token {
                 value: word.to_string(),
                 kind: TokenKind::BOOL,
