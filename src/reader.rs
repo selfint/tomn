@@ -1,6 +1,6 @@
 pub(crate) struct Reader {
     content: String,
-    pos: u128,
+    pos: usize,
 }
 
 impl Reader {
@@ -29,8 +29,12 @@ impl Reader {
 
     fn consume_n(&mut self, n: usize) -> String {
         let word = self.peek_n(n);
-        self.pos += n as u128;
+        self.pos += n;
         word
+    }
+
+    fn is_eof(&self) -> bool {
+        self.pos == self.content.chars().count()
     }
 }
 
@@ -74,5 +78,14 @@ mod tests {
         let mut reader = Reader::new(content);
         assert_eq!(reader.consume_n(6), "hello ");
         assert_eq!(reader.pos, 6);
+    }
+
+    #[test]
+    fn test_is_eof() {
+        let content = "hello world!";
+        let mut reader = Reader::new(content);
+        assert!(!reader.is_eof());
+        reader.consume_n(12);
+        assert!(reader.is_eof());
     }
 }
