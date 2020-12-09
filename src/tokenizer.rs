@@ -32,8 +32,8 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test_token_identification() {
-        let true_word = "true";
+    fn test_true_keyword_tokenization() {
+        let true_word = keyword_consts::TRUE_KEYWORD;
         let tokenizer = Tokenizer;
         let token = tokenizer.convert_word_to_token(true_word).unwrap();
         assert_eq!(token.kind, TokenKind::BOOL);
