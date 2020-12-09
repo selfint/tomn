@@ -1,4 +1,4 @@
-mod keyword_consts;
+mod error_handler;
 mod lexer;
 mod parser;
 mod reader;
