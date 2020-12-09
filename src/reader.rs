@@ -12,12 +12,12 @@ impl Reader {
     }
 
     fn peek(&self) -> String {
-        let word: String = self.content.split_ascii_whitespace().take(1).collect();
+        let word: String = self.content.chars().take(1).collect();
         word
     }
 
     fn peek_n(&self, n: usize) -> String {
-        let word: String = self.content.split_ascii_whitespace().take(n).collect();
+        let word: String = self.content.chars().take(n).collect();
         word
     }
 }
@@ -38,13 +38,13 @@ mod tests {
     fn test_peek() {
         let content = "hello world!";
         let reader = Reader::new(content);
-        assert_eq!(reader.peek(), "hello");
+        assert_eq!(reader.peek(), "h");
     }
 
     #[test]
     fn test_peek_n() {
         let content = "hello world!";
         let reader = Reader::new(content);
-        assert_eq!(reader.peek_n(2), "helloworld!");
+        assert_eq!(reader.peek_n(6), "hello ");
     }
 }
