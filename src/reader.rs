@@ -4,34 +4,34 @@ pub(crate) struct Reader {
 }
 
 impl Reader {
-    fn new(content: &str) -> Reader {
+    pub fn new(content: &str) -> Reader {
         Reader {
             content: content.to_string(),
             pos: 0,
         }
     }
 
-    fn peek(&self) -> Option<char> {
+    pub fn peek(&self) -> Option<char> {
         self.content.chars().skip(self.pos).take(1).next()
     }
 
-    fn peek_n(&self, n: usize) -> Vec<char> {
+    pub fn peek_n(&self, n: usize) -> Vec<char> {
         self.content.chars().skip(self.pos).take(n).collect()
     }
 
-    fn consume(&mut self) -> Option<char> {
+    pub fn consume(&mut self) -> Option<char> {
         let c = self.peek();
         self.pos += 1;
         c
     }
 
-    fn consume_n(&mut self, n: usize) -> Vec<char> {
+    pub fn consume_n(&mut self, n: usize) -> Vec<char> {
         let chars = self.peek_n(n);
         self.pos += n;
         chars
     }
 
-    fn is_eof(&self) -> bool {
+    pub fn is_eof(&self) -> bool {
         self.pos == self.content.chars().count()
     }
 }
