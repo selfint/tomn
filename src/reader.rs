@@ -11,26 +11,24 @@ impl Reader {
         }
     }
 
-    fn peek(&self) -> String {
-        let word: String = self.content.chars().take(1).collect();
-        word
+    fn peek(&self) -> Option<char> {
+        self.content.chars().skip(self.pos).take(1).next()
     }
 
-    fn peek_n(&self, n: usize) -> String {
-        let word: String = self.content.chars().take(n).collect();
-        word
+    fn peek_n(&self, n: usize) -> Vec<char> {
+        self.content.chars().skip(self.pos).take(n).collect()
     }
 
-    fn consume(&mut self) -> String {
-        let word = self.peek();
+    fn consume(&mut self) -> Option<char> {
+        let c = self.peek();
         self.pos += 1;
-        word
+        c
     }
 
-    fn consume_n(&mut self, n: usize) -> String {
-        let word = self.peek_n(n);
+    fn consume_n(&mut self, n: usize) -> Vec<char> {
+        let chars = self.peek_n(n);
         self.pos += n;
-        word
+        chars
     }
 
     fn is_eof(&self) -> bool {
@@ -54,21 +52,22 @@ mod tests {
     fn test_peek() {
         let content = "hello world!";
         let reader = Reader::new(content);
-        assert_eq!(reader.peek(), "h");
+        assert_eq!(reader.peek(), Some('h'));
     }
 
     #[test]
     fn test_peek_n() {
         let content = "hello world!";
         let reader = Reader::new(content);
-        assert_eq!(reader.peek_n(6), "hello ");
+        let expected = vec!['h', 'e', 'l', 'l', 'o', ' '];
+        assert_eq!(reader.peek_n(6), expected);
     }
 
     #[test]
     fn test_consume() {
         let content = "hello world!";
         let mut reader = Reader::new(content);
-        assert_eq!(reader.consume(), "h");
+        assert_eq!(reader.consume(), Some('h'));
         assert_eq!(reader.pos, 1);
     }
 
@@ -76,7 +75,8 @@ mod tests {
     fn test_consume_n() {
         let content = "hello world!";
         let mut reader = Reader::new(content);
-        assert_eq!(reader.consume_n(6), "hello ");
+        let expected = vec!['h', 'e', 'l', 'l', 'o', ' '];
+        assert_eq!(reader.consume_n(6), expected);
         assert_eq!(reader.pos, 6);
     }
 
